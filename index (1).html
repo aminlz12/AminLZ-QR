@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="AminLZ QR — Generador de códigos QR gratis">
+<meta property="og:description" content="Crea, personaliza y descarga códigos QR gratis en segundos. Sin registro y con generación privada en tu navegador.">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Crea, personaliza y descarga códigos QR gratis con AminLZ QR. Genera QR para enlaces, texto, Wi-Fi, correo, teléfono, WhatsApp y contactos.">
+<title>AminLZ QR — Generador de códigos QR gratis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+:root{color-scheme:light;--bg:#f7f8fc;--surface:#fff;--ink:#17213b;--muted:#69738c;--line:#e5e8f1;--brand:#3157e8;--brand2:#2444c7;--soft:#edf1ff;--green:#16845b;--shadow:0 18px 55px rgba(30,47,94,.09)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.topbar{height:76px;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}
+.nav{width:min(1180px,calc(100% - 40px));margin:auto;display:flex;align-items:center;gap:30px}
+.brand{display:flex;align-items:center;gap:10px;font-size:1.25rem;font-weight:850;letter-spacing:-.05em;white-space:nowrap}
+.brand-mark{width:36px;height:36px;border-radius:11px;background:var(--brand);display:grid;place-items:center;color:white;box-shadow:0 5px 13px #3157e844}
+.brand-mark svg{width:23px;height:23px}
+.navlinks{display:flex;align-items:center;gap:24px;color:#505b77;font-size:.93rem;font-weight:600}
+.navlinks a:hover{color:var(--brand)}
+.navright{margin-left:auto;display:flex;align-items:center;gap:12px}
+.language{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:9px 11px;color:var(--ink);font-weight:650;max-width:190px}
+.language select{border:0;background:transparent;color:inherit;outline:none;max-width:135px;cursor:pointer}
+.langflag{font-size:1.15rem}
+.theme-btn{width:39px;height:39px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);font-size:1.1rem}
+main{max-width:1180px;margin:0 auto;padding:46px 20px 76px}
+.hero{text-align:center;max-width:760px;margin:0 auto 30px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #dce4ff;background:#f0f3ff;color:#3150c9;border-radius:100px;padding:6px 12px;font-size:.8rem;font-weight:750;letter-spacing:.02em}
+.eyebrow-dot{width:7px;height:7px;background:#31a77b;border-radius:50%}
+h1{font-size:clamp(2.1rem,5vw,3.65rem);line-height:1.08;letter-spacing:-.055em;margin:17px 0 14px;font-weight:850}
+h1 span{color:var(--brand)}
+.hero p{margin:0 auto;color:var(--muted);font-size:1.07rem;max-width:610px}
+.typebar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:27px 0 20px}
+.type-btn{border:1px solid var(--line);background:#fff;color:#52607c;padding:10px 15px;border-radius:12px;font-weight:700;font-size:.91rem;display:flex;align-items:center;gap:8px;transition:.15s}
+.type-btn:hover{border-color:#b8c5ff;color:var(--brand)}
+.type-btn.active{background:var(--soft);border-color:#bdcaff;color:#2347d0;box-shadow:inset 0 0 0 1px #dbe2ff}
+.workspace{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);gap:20px;align-items:stretch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:21px;box-shadow:var(--shadow);overflow:hidden}
+.panel-head{padding:22px 25px 18px;border-bottom:1px solid #edf0f6;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.panel-head h2{font-size:1.05rem;margin:0;letter-spacing:-.02em}
+.step{color:var(--muted);font-size:.8rem;font-weight:700}
+.panel-body{padding:22px 25px 25px}
+.field-label{display:block;font-size:.88rem;font-weight:750;margin:0 0 8px}
+.field{width:100%;border:1px solid #dfe4f0;border-radius:12px;padding:13px 14px;color:var(--ink);background:#fff;outline:none;transition:.15s}
+.field:focus{border-color:#8298ff;box-shadow:0 0 0 3px #3157e817}
+textarea.field{resize:vertical;min-height:105px}
+.field::placeholder{color:#a0a8bb}
+.form-group{margin-bottom:18px}
+.helper{color:var(--muted);font-size:.81rem;margin:7px 0 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.color-control{display:flex;align-items:center;gap:10px;border:1px solid #e1e5ef;border-radius:12px;padding:8px 10px;height:49px}
+input[type=color]{width:30px;height:30px;border:0;padding:0;background:transparent;cursor:pointer}
+.color-value{font-size:.84rem;color:var(--muted);font-weight:650}
+.preset-label{font-size:.82rem;color:var(--muted);font-weight:750;margin:10px 0 8px}
+.color-presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.color-preset{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 10px;border-radius:999px;font-size:.78rem;font-weight:700;transition:transform .15s,border-color .15s}
+.color-preset:hover{transform:translateY(-1px);border-color:var(--brand)}
+.color-preset i{width:15px;height:15px;border-radius:50%;border:1px solid #0002;display:block;flex:0 0 15px}
+.trust-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 22px;margin:22px auto 0;color:var(--muted);font-size:.82rem}
+.trust-strip span{display:inline-flex;align-items:center;gap:7px}
+.trust-strip b{color:var(--green);font-size:1rem}
+.faq-section{margin:62px auto 0;max-width:850px}
+.faq-section h2{text-align:center;font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.035em;margin:0 0 9px}
+.faq-intro{text-align:center;color:var(--muted);margin:0 auto 22px;max-width:580px}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:10px 0;overflow:hidden}
+.faq-item summary{cursor:pointer;list-style:none;padding:17px 19px;font-weight:750;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:after{content:'+';font-size:1.25rem;color:var(--brand)}
+.faq-item[open] summary:after{content:'−'}
+.faq-item p{padding:0 19px 18px;margin:0;color:var(--muted);font-size:.92rem}
+body.dark .color-preset{background:#151f38;color:var(--ink)}
+body.dark .faq-item{background:#151f38}
+.range-line{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.range-line .field-label{margin:0}
+.range-value{font-size:.82rem;color:var(--muted);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--brand)}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.action-btn{width:100%;border:0;background:var(--brand);color:#fff;border-radius:12px;padding:14px 18px;font-weight:800;box-shadow:0 8px 18px #3157e82b;transition:background .15s,transform .15s}
+.action-btn:hover{background:var(--brand2);transform:translateY(-1px)}
+.action-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.secondary-btn{width:100%;border:1px solid #dfe4f0;background:#fff;color:var(--ink);border-radius:12px;padding:13px 16px;font-weight:750}
+.secondary-btn:hover{border-color:#aebdff;background:#f8f9ff}
+.status{min-height:23px;font-size:.85rem;color:var(--green);margin:10px 0 0}
+.status.error{color:#c0392b}
+.preview-panel{display:flex;flex-direction:column}
+.preview-panel .panel-body{display:flex;flex-direction:column;flex:1}
+.preview-area{flex:1;min-height:320px;border:1px dashed #d8deed;border-radius:15px;background:linear-gradient(145deg,#fbfcff,#f3f5fb);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:28px 22px}
+.preview-inner{text-align:center;color:var(--muted);width:100%;max-width:360px;flex:0 0 auto}
+.preview-inner .qr-icon{margin:0 auto 12px}
+.preview-inner strong{display:block;font-size:1.05rem;color:var(--ink);margin-bottom:6px}
+.preview-inner p{margin:0 auto;max-width:340px;font-size:.9rem;line-height:1.55}
+#qrCanvas:not([hidden]){align-self:center;width:min(100%,320px);max-width:100%;height:auto!important;padding:12px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(23,33,59,.08)}
+.qr-icon{width:66px;height:66px;border-radius:19px;background:#e9eeff;color:var(--brand);display:grid;place-items:center;margin:0 auto 14px}
+.qr-icon svg{width:36px;height:36px}
+#qrCanvas{display:block;max-width:100%;height:auto!important;image-rendering:pixelated;background:#fff;border-radius:6px}
+.preview-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 17px;color:var(--muted);font-size:.8rem}
+.ready{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:750}
+.ready i{width:7px;height:7px;background:#25a875;border-radius:50%}
+.downloads{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.downloads button{font-size:.9rem}
+.note{display:flex;gap:11px;align-items:flex-start;background:#f4f7ff;border:1px solid #e3e9ff;border-radius:13px;padding:13px 14px;color:#596681;font-size:.83rem;margin-top:20px}
+.note b{color:#2d4cc2}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:27px}
+.feature{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.75);padding:19px;display:flex;gap:13px;align-items:flex-start}
+.feature-icon{flex:0 0 39px;width:39px;height:39px;border-radius:12px;background:#edf1ff;color:var(--brand);display:grid;place-items:center;font-size:1.1rem}
+.feature h3{font-size:.94rem;margin:0 0 4px}
+.feature p{font-size:.82rem;color:var(--muted);margin:0}
+footer{border-top:1px solid var(--line);padding:24px 20px;text-align:center;color:var(--muted);font-size:.82rem;background:#fff}
+.mobile-menu{display:none}
+body.dark{--bg:#0d1427;--surface:#151f38;--ink:#edf1ff;--muted:#a5afca;--line:#2a3658;--shadow:0 18px 55px #0003}
+body.dark .topbar,body.dark footer,body.dark .language,body.dark .theme-btn,body.dark .type-btn,body.dark .field,body.dark .secondary-btn,body.dark .color-control{background:#151f38;color:var(--ink)}
+body.dark .navlinks{color:#bdc7e2}
+body.dark .panel-head{border-color:var(--line)}
+body.dark .field,body.dark .color-control{border-color:var(--line)}
+body.dark .type-btn.active{background:#24325c;color:#dce4ff;border-color:#526cc8}
+body.dark .preview-area{background:#10182c;border-color:#344262}
+body.dark .note{background:#1b2848;border-color:#2a3b69;color:#c0cbe8}
+body.dark .note b{color:#aebdff}
+body.dark .feature{background:#151f38}
+body.dark .eyebrow{background:#1e2a4a;border-color:#344875;color:#bdcaff}
+body.dark .qr-icon,.dark .feature-icon{background:#24325c;color:#b8c6ff}
+body.dark .brand-mark{color:#fff}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0;transition:opacity .45s ease}
+body.dark #starfield{opacity:1}
+body.dark .topbar,body.dark main,body.dark footer{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){#starfield{display:none}}
+@media(max-width:820px){.nav{gap:14px;width:calc(100% - 28px)}.navlinks{display:none}.workspace{grid-template-columns:1fr}.preview-area{min-height:280px}.features{grid-template-columns:1fr}.hero{margin-bottom:22px}main{padding-top:32px}}
+@media(max-width:520px){.topbar{height:66px}.brand{font-size:1.1rem}.brand-mark{width:32px;height:32px}.nav{gap:8px}.navright{gap:7px}.language{padding:7px 8px;max-width:150px}.language select{max-width:96px;font-size:.82rem}.theme-btn{width:35px;height:35px}.panel-head{padding:18px 17px 15px}.panel-body{padding:18px 17px 20px}.typebar{gap:6px}.type-btn{padding:9px 10px;font-size:.82rem}.hero p{font-size:.96rem}.two-col{gap:9px}.options{grid-template-columns:1fr}.downloads{grid-template-columns:1fr}.preview-area{min-height:245px}}
+
+.feedback-section{max-width:850px;margin:62px auto 0;scroll-margin-top:95px}
+.feedback-card{padding:clamp(22px,4vw,36px);border:1px solid var(--line);border-radius:21px;background:var(--surface);box-shadow:var(--shadow)}
+.feedback-heading{text-align:center;max-width:620px;margin:0 auto 25px}
+.feedback-mark{width:48px;height:48px;border-radius:15px;background:var(--soft);color:var(--brand);display:grid;place-items:center;margin:0 auto 12px;font-size:1.35rem}
+.feedback-heading h2{font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:-.035em;margin:0 0 8px}
+.feedback-heading p{color:var(--muted);margin:0}
+.feedback-form{max-width:620px;margin:0 auto;display:grid;gap:16px}
+.feedback-form label{display:block;font-size:.88rem;font-weight:750;margin-bottom:7px}
+.feedback-form input:not([type=checkbox]),.feedback-form select,.feedback-form textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--bg);color:var(--ink);outline:none}
+.feedback-form textarea{min-height:125px;resize:vertical}
+.feedback-form input:focus,.feedback-form select:focus,.feedback-form textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px #3157e81c}
+.feedback-consent{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:.82rem;line-height:1.45}
+.feedback-consent input{margin-top:4px;accent-color:var(--brand)}
+.feedback-help{font-size:.79rem;color:var(--muted);margin:6px 0 0}
+.feedback-submit{border:0;border-radius:12px;background:var(--brand);color:white;padding:14px 18px;font-weight:800;box-shadow:0 8px 18px #3157e82b}
+.feedback-submit:hover{background:var(--brand2);transform:translateY(-1px)}
+.feedback-privacy{font-size:.77rem;color:var(--muted);text-align:center;margin:0}
+.feedback-success{display:none;border:1px solid #b9e6d0;background:#effbf5;color:#176844;border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:.9rem}
+body.dark .feedback-mark{background:#24325c;color:#b8c6ff}
+body.dark .feedback-success{background:#122d26;color:#a7e7c7;border-color:#245b49}
+@media(max-width:520px){.feedback-card{padding:21px 17px}.feedback-section{margin-top:44px}}
+
+</style>
+</head>
+<body>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<header class="topbar">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="#" aria-label="AminLZ QR home">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v1"/></svg></span>
+      <span>AminLZ <span style="color:var(--brand)">QR</span></span>
+    </a>
+    <div class="navlinks">
+      <a href="#generator" data-i18n="navCreate">Create QR</a>
+      <a href="#features" data-i18n="navFeatures">Features</a>
+      <a href="#how" data-i18n="navHow">How it works</a>
+    </div>
+    <div class="navright">
+      <label class="language" aria-label="Select language"><span class="langflag" id="langFlag">🇪🇸</span><select id="language" aria-label="Language">
+        <option value="es">Español</option><option value="en">English</option><option value="zh">中文</option><option value="hi">हिन्दी</option><option value="ar">العربية</option><option value="fr">Français</option><option value="bn">বাংলা</option><option value="pt">Português</option><option value="ru">Русский</option><option value="ur">اردو</option><option value="id">Bahasa Indonesia</option><option value="ja">日本語</option>
+      </select></label>
+      <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">☾</button>
+    </div>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="eyebrow">Free QR code generator</span></div>
+    <h1><span data-i18n="heroFirst">Create your QR code</span><br><span data-i18n="heroSecond">in seconds</span></h1>
+    <p data-i18n="heroDesc">Create a QR code for a link, text, Wi-Fi and more. Customize it and download it instantly, free.</p>
+  </section>
+  <div class="typebar" id="typebar" role="group" aria-label="QR content type">
+    <button class="type-btn active" type="button" data-type="url"><span>↗</span><span data-i18n="typeUrl">URL / Link</span></button>
+    <button class="type-btn" type="button" data-type="text"><span>▤</span><span data-i18n="typeText">Text</span></button>
+    <button class="type-btn" type="button" data-type="wifi"><span>⌁</span><span data-i18n="typeWifi">Wi-Fi</span></button>
+    <button class="type-btn" type="button" data-type="email"><span>✉</span><span data-i18n="typeEmail">Email</span></button>
+    <button class="type-btn" type="button" data-type="phone"><span>☎</span><span data-i18n="typePhone">Phone</span></button>
+    <button class="type-btn" type="button" data-type="whatsapp"><span>◉</span><span data-i18n="typeWhatsapp">WhatsApp</span></button>
+    <button class="type-btn" type="button" data-type="sms"><span>✉</span><span data-i18n="typeSms">SMS</span></button>
+    <button class="type-btn" type="button" data-type="location"><span>⌖</span><span data-i18n="typeLocation">Ubicación</span></button>
+    <button class="type-btn" type="button" data-type="vcard"><span>▣</span><span data-i18n="typeVcard">Contacto</span></button>
+  </div>
+  <section class="workspace" id="generator" aria-label="QR generator">
+    <div class="panel">
+      <div class="panel-head"><h2 data-i18n="customizeTitle">Customize your QR code</h2><span class="step" data-i18n="stepOne">STEP 1 OF 2</span></div>
+      <div class="panel-body">
+        <div id="dynamicFields"></div>
+        <div class="form-group">
+          <label class="field-label" for="fg" data-i18n="qrColor">QR code color</label>
+          <div class="two-col">
+            <div class="color-control"><input id="fg" type="color" value="#17213b" aria-label="QR code color"><span class="color-value" id="fgValue">#17213B</span></div>
+            <div class="color-control"><input id="bg" type="color" value="#ffffff" aria-label="Background color"><span class="color-value" id="bgValue">#FFFFFF</span></div>
+          </div>
+          <div class="preset-label">Estilos rápidos</div>
+          <div class="color-presets" role="group" aria-label="Estilos de color">
+            <button class="color-preset" type="button" data-fg="#17213b" data-bg="#ffffff"><i style="background:linear-gradient(135deg,#17213b 50%,#fff 50%)"></i>Clásico</button>
+            <button class="color-preset" type="button" data-fg="#3157e8" data-bg="#ffffff"><i style="background:linear-gradient(135deg,#3157e8 50%,#fff 50%)"></i>Azul</button>
+            <button class="color-preset" type="button" data-fg="#087f5b" data-bg="#ffffff"><i style="background:linear-gradient(135deg,#087f5b 50%,#fff 50%)"></i>Esmeralda</button>
+            <button class="color-preset" type="button" data-fg="#6d28d9" data-bg="#ffffff"><i style="background:linear-gradient(135deg,#6d28d9 50%,#fff 50%)"></i>Violeta</button>
+            <button class="color-preset" type="button" data-fg="#ffffff" data-bg="#17213b"><i style="background:linear-gradient(135deg,#fff 50%,#17213b 50%)"></i>Invertido</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="range-line"><label class="field-label" for="size" data-i18n="sizeLabel">Download size</label><span class="range-value" id="sizeValue">512 × 512 px</span></div>
+          <input id="size" type="range" min="128" max="1024" step="64" value="512">
+        </div>
+        <div class="form-group">
+          <div class="range-line"><label class="field-label" for="margin" data-i18n="marginLabel">White margin</label><span class="range-value" id="marginValue">4</span></div>
+          <input id="margin" type="range" min="0" max="10" step="1" value="4">
+        </div>
+        <div class="form-group">
+          <label class="field-label" for="ec" data-i18n="correctionLabel">Error correction</label>
+          <select class="field" id="ec"><option value="L" data-i18n="low">Low</option><option value="M" selected data-i18n="medium">Medium (recommended)</option><option value="Q" data-i18n="high">High</option><option value="H" data-i18n="highest">Highest</option></select>
+          <p class="helper" data-i18n="correctionHint">Higher correction can help the code scan if it gets damaged.</p>
+        </div>
+        <button class="action-btn" id="generate" type="button" data-i18n="generateBtn">Generate QR code</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="panel preview-panel">
+      <div class="panel-head"><h2 data-i18n="previewTitle">Your QR code</h2><span class="step" data-i18n="stepTwo">STEP 2 OF 2</span></div>
+      <div class="panel-body">
+        <div class="preview-area" id="previewArea">
+          <div class="preview-inner" id="emptyState">
+            <div class="qr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v1"/></svg></div>
+            <strong data-i18n="emptyTitle">Your QR code will appear here</strong>
+            <p data-i18n="emptyDesc">Enter your content and select “Generate QR code” to see your code.</p>
+          </div>
+          <canvas id="qrCanvas" hidden></canvas>
+        </div>
+        <div class="preview-meta"><span id="qrMeta" data-i18n="waiting">Waiting for content</span><span class="ready"><i></i><span data-i18n="private">Generated in your browser</span></span></div>
+        <div class="downloads">
+          <button class="action-btn" id="downloadPng" type="button" disabled data-i18n="downloadPng">↓ Download PNG</button>
+          <button class="secondary-btn" id="downloadSvg" type="button" disabled data-i18n="downloadSvg">↓ Download SVG</button>
+        </div>
+        <div class="note"><span>✦</span><div><b data-i18n="freeTitle">Free and easy</b><br><span data-i18n="freeDesc">Your QR code is generated locally in your browser. The content you enter is not sent to our server.</span></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="trust-strip" aria-label="Ventajas"><span><b>✓</b> Gratis y sin registro</span><span><b>✓</b> Sin marca de agua</span><span><b>✓</b> Tus datos se quedan en tu navegador</span></div>
+  <section class="features" id="features">
+    <article class="feature"><div class="feature-icon">⚡</div><div><h3 data-i18n="featureFast">Quick and simple</h3><p data-i18n="featureFastDesc">Create your QR code in a few clicks, with no account needed.</p></div></article>
+    <article class="feature"><div class="feature-icon">✎</div><div><h3 data-i18n="featureDesign">Customize the design</h3><p data-i18n="featureDesignDesc">Choose colors, size and margin to suit your needs.</p></div></article>
+    <article class="feature"><div class="feature-icon">⇩</div><div><h3 data-i18n="featureDownload">Download instantly</h3><p data-i18n="featureDownloadDesc">Save a PNG image or a scalable SVG file.</p></div></article>
+  </section>
+  <div id="how" class="note" style="max-width:760px;margin:26px auto 0"><span>ⓘ</span><div><b data-i18n="howTitle">How it works</b><br><span data-i18n="howDesc">Choose a content type, fill in the fields, generate the QR code, and download it. These are static QR codes: the encoded information cannot be edited after printing.</span></div></div>
+  <section class="feedback-section" id="feedback" aria-labelledby="feedbackTitle">
+    <div class="feedback-card">
+      <div class="feedback-heading"><div class="feedback-mark" aria-hidden="true">✦</div><h2 id="feedbackTitle">Ayúdanos a mejorar AminLZ QR</h2><p>¿Tienes una idea, has encontrado un fallo o echas de menos una función? Cuéntanoslo. Leemos tus sugerencias.</p></div>
+      <div class="feedback-success" id="feedbackSuccess" role="status" aria-live="polite">¡Gracias! Si has enviado el formulario, revisa la confirmación del servicio.</div>
+      <form class="feedback-form" action="https://formsubmit.co/businessamine12@gmail.com" method="POST" id="feedbackForm">
+        <input type="hidden" name="_subject" value="Nueva sugerencia para AminLZ QR">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <div><label for="feedbackType">¿Qué quieres compartir?</label><select id="feedbackType" name="Tipo de mensaje" required><option value="Idea de mejora">Tengo una idea para mejorar la web</option><option value="Error o fallo">He encontrado un error</option><option value="Nueva función">Quiero proponer una nueva función</option><option value="Otro comentario">Otro comentario</option></select></div>
+        <div><label for="feedbackMessage">Cuéntanos tu idea o el problema</label><textarea id="feedbackMessage" name="Sugerencia" placeholder="Explícanos qué te gustaría mejorar o qué ha fallado…" minlength="8" maxlength="5000" required></textarea></div>
+        <div><label for="feedbackEmail">Tu correo electrónico (opcional)</label><input id="feedbackEmail" name="_replyto" type="email" autocomplete="email" placeholder="tu@correo.com"><p class="feedback-help">Déjalo si quieres que podamos responderte personalmente.</p></div>
+        <label class="feedback-consent"><input id="feedbackConsent" type="checkbox" name="Consentimiento para responder" value="Acepto que usen mi correo para responder a esta sugerencia"><span>Si dejas tu correo, aceptas que lo usemos únicamente para responder a esta sugerencia.</span></label>
+        <button class="feedback-submit" type="submit">Enviar sugerencia →</button>
+        <p class="feedback-privacy">No incluyas contraseñas ni información sensible. El envío lo gestiona un servicio externo de formularios.</p>
+      </form>
+    </div>
+  </section>
+  <section class="faq-section" id="faq">
+    <h2>Preguntas frecuentes</h2>
+    <p class="faq-intro">Lo esencial para crear y utilizar tus códigos QR con confianza.</p>
+    <details class="faq-item"><summary>¿Los códigos QR caducan?</summary><p>Los códigos que genera AminLZ QR son estáticos: la información queda guardada dentro del propio código. No dependen de una suscripción ni de que AminLZ QR siga funcionando. Si codificas un enlace, ese enlace debe seguir activo para que funcione.</p></details>
+    <details class="faq-item"><summary>¿Qué ocurre con los datos que escribo?</summary><p>La generación se realiza en tu navegador. El contenido que escribes para crear el QR no se envía a un servidor de AminLZ QR.</p></details>
+    <details class="faq-item"><summary>¿Qué formato debo descargar?</summary><p>PNG es práctico para documentos, presentaciones y redes sociales. SVG es vectorial y suele ser la mejor opción para ampliar o imprimir sin perder nitidez.</p></details>
+    <details class="faq-item"><summary>¿Puedo cambiar el destino después de imprimirlo?</summary><p>En un código QR estático no se puede cambiar la información ya codificada. Si necesitas modificar el destino más adelante, tendrás que crear un nuevo código y volver a compartirlo o imprimirlo.</p></details>
+  </section>
+</main>
+<footer><span>© </span><span id="year"></span> AminLZ QR · <span data-i18n="footer">Free QR code generator</span></footer>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var flags={es:'🇪🇸',en:'🇬🇧',zh:'🇨🇳',hi:'🇮🇳',ar:'🇸🇦',fr:'🇫🇷',bn:'🇧🇩',pt:'🇧🇷',ru:'🇷🇺',ur:'🇵🇰',id:'🇮🇩',ja:'🇯🇵'};
+var translations={
+es:{navCreate:'Crear QR',navFeatures:'Ventajas',navHow:'Cómo funciona',eyebrow:'Generador de códigos QR gratis',heroFirst:'Crea tu código QR',heroSecond:'en segundos',heroDesc:'Crea un QR para enlaces, texto, Wi-Fi y más. Personalízalo y descárgalo al instante gratis.',typeUrl:'URL / Enlace',typeText:'Texto',typeWifi:'Wi-Fi',typeEmail:'Correo',typePhone:'Teléfono',typeWhatsapp:'WhatsApp',typeSms:'SMS',typeLocation:'Ubicación',typeVcard:'Contacto',customizeTitle:'Personaliza tu código QR',stepOne:'PASO 1 DE 2',qrColor:'Color del código QR',sizeLabel:'Tamaño de descarga',marginLabel:'Margen blanco',correctionLabel:'Corrección de errores',low:'Baja',medium:'Media (recomendada)',high:'Alta',highest:'Máxima',correctionHint:'Una corrección más alta puede ayudar si el código se daña.',generateBtn:'Generar código QR',previewTitle:'Tu código QR',stepTwo:'PASO 2 DE 2',emptyTitle:'Tu código QR aparecerá aquí',emptyDesc:'Introduce el contenido y pulsa «Generar código QR» para ver el código.',waiting:'Esperando contenido',private:'Generado en tu navegador',downloadPng:'↓ Descargar PNG',downloadSvg:'↓ Descargar SVG',freeTitle:'Gratis y fácil',freeDesc:'El QR se genera en tu navegador. El contenido no se envía a nuestro servidor.',featureFast:'Rápido y sencillo',featureFastDesc:'Crea tu QR en unos clics, sin cuenta.',featureDesign:'Diseña a tu gusto',featureDesignDesc:'Elige colores, tamaño y margen.',featureDownload:'Descarga al instante',featureDownloadDesc:'Guárdalo como imagen PNG o archivo SVG escalable.',howTitle:'Cómo funciona',howDesc:'Elige el tipo, completa los campos, genera el QR y descárgalo. Son códigos estáticos: no podrás editar la información después de imprimirlos.',footer:'Generador de códigos QR gratis',urlLabel:'Enlace o URL',urlPlaceholder:'https://ejemplo.com',textLabel:'Texto que quieres compartir',textPlaceholder:'Escribe tu texto aquí',wifiName:'Nombre de la red (SSID)',wifiPassword:'Contraseña',wifiSecurity:'Seguridad de la red',wifiNone:'Sin contraseña',emailAddress:'Dirección de correo',emailSubject:'Asunto (opcional)',emailBody:'Mensaje (opcional)',phoneNumber:'Número de teléfono',smsNumber:'Número para SMS',smsMessage:'Mensaje para SMS (opcional)',latitude:'Latitud (de -90 a 90)',longitude:'Longitud (de -180 a 180)',contactName:'Nombre completo',contactPhone:'Teléfono (opcional)',contactEmail:'Correo electrónico (opcional)',contactOrg:'Empresa (opcional)',whatsappNumber:'WhatsApp con prefijo de país',whatsappMessage:'Mensaje (opcional)',contrast:'Aviso: hay poco contraste entre los colores; puede que algunos lectores no lo detecten.',ready:'✓ Código QR listo para descargar',enterContent:'Introduce el contenido para crear tu QR.',tooLong:'El contenido es demasiado largo. Prueba con un texto más corto.',invalid:'Revisa los campos obligatorios.',downloaded:'✓ Descargado',colorFg:'QR',colorBg:'Fondo'},
+en:{navCreate:'Create QR',navFeatures:'Features',navHow:'How it works',eyebrow:'Free QR code generator',heroFirst:'Create your QR code',heroSecond:'in seconds',heroDesc:'Create a QR for links, text, Wi-Fi and more. Customize it and download instantly for free.',typeUrl:'URL / Link',typeText:'Text',typeWifi:'Wi-Fi',typeEmail:'Email',typePhone:'Phone',typeWhatsapp:'WhatsApp',typeSms:'SMS',typeLocation:'Location',typeVcard:'Contact',customizeTitle:'Customize your QR code',stepOne:'STEP 1 OF 2',qrColor:'QR code color',sizeLabel:'Download size',marginLabel:'White margin',correctionLabel:'Error correction',low:'Low',medium:'Medium (recommended)',high:'High',highest:'Highest',correctionHint:'Higher correction can help if the code gets damaged.',generateBtn:'Generate QR code',previewTitle:'Your QR code',stepTwo:'STEP 2 OF 2',emptyTitle:'Your QR code will appear here',emptyDesc:'Enter your content and select “Generate QR code” to see your code.',waiting:'Waiting for content',private:'Generated in your browser',downloadPng:'↓ Download PNG',downloadSvg:'↓ Download SVG',freeTitle:'Free and easy',freeDesc:'Your QR code is generated in your browser. Your content is not sent to our server.',featureFast:'Quick and simple',featureFastDesc:'Create a QR code in a few clicks, no account needed.',featureDesign:'Customize the design',featureDesignDesc:'Choose colors, size and margin to suit your needs.',featureDownload:'Download instantly',featureDownloadDesc:'Save a PNG image or a scalable SVG file.',howTitle:'How it works',howDesc:'Choose a content type, fill in the fields, generate the QR code, and download it. These are static QR codes: encoded information cannot be edited after printing.',footer:'Free QR code generator',urlLabel:'Link or URL',urlPlaceholder:'https://example.com',textLabel:'Text to share',textPlaceholder:'Type your text here',wifiName:'Network name (SSID)',wifiPassword:'Password',wifiSecurity:'Network security',wifiNone:'No password',emailAddress:'Email address',emailSubject:'Subject (optional)',emailBody:'Message (optional)',phoneNumber:'Phone number',smsNumber:'SMS phone number',smsMessage:'SMS message (optional)',latitude:'Latitude (-90 to 90)',longitude:'Longitude (-180 to 180)',contactName:'Full name',contactPhone:'Phone (optional)',contactEmail:'Email (optional)',contactOrg:'Organization (optional)',whatsappNumber:'WhatsApp number with country code',whatsappMessage:'Message (optional)',contrast:'Warning: low contrast between colors; some scanners may not detect it.',ready:'✓ QR code ready to download',enterContent:'Enter content to create your QR code.',tooLong:'Content is too long. Try shorter text.',invalid:'Please check the required fields.',downloaded:'✓ Downloaded',colorFg:'QR',colorBg:'Background'},
+zh:{navCreate:'生成二维码',navFeatures:'功能',navHow:'使用方法',eyebrow:'免费二维码生成器',heroFirst:'创建你的二维码',heroSecond:'只需几秒钟',heroDesc:'为链接、文本、Wi-Fi 等内容创建二维码。自定义并免费下载。',typeUrl:'网址 / 链接',typeText:'文本',typeWifi:'Wi-Fi',typeEmail:'电子邮件',typePhone:'电话',typeWhatsapp:'WhatsApp',customizeTitle:'自定义二维码',stepOne:'第 1 步，共 2 步',qrColor:'二维码颜色',sizeLabel:'下载尺寸',marginLabel:'白色边距',correctionLabel:'纠错级别',low:'低',medium:'中（推荐）',high:'高',highest:'最高',correctionHint:'较高的纠错级别有助于二维码受损后仍可扫描。',generateBtn:'生成二维码',previewTitle:'你的二维码',stepTwo:'第 2 步，共 2 步',emptyTitle:'二维码将在此显示',emptyDesc:'输入内容并点击“生成二维码”。',waiting:'等待输入内容',private:'在浏览器中生成',downloadPng:'↓ 下载 PNG',downloadSvg:'↓ 下载 SVG',freeTitle:'免费且简单',freeDesc:'二维码在浏览器本地生成，内容不会发送到我们的服务器。',featureFast:'快速简单',featureFastDesc:'无需账户，几步即可创建二维码。',featureDesign:'自定义设计',featureDesignDesc:'选择颜色、尺寸和边距。',featureDownload:'即时下载',featureDownloadDesc:'保存为 PNG 图片或可缩放的 SVG 文件。',howTitle:'使用方法',howDesc:'选择内容类型、填写信息、生成并下载。此处生成的是静态二维码，打印后无法更改其中的信息。',footer:'免费二维码生成器',urlLabel:'链接或网址',urlPlaceholder:'https://example.com',textLabel:'要分享的文本',textPlaceholder:'在此输入文本',wifiName:'网络名称（SSID）',wifiPassword:'密码',wifiSecurity:'网络安全类型',wifiNone:'无需密码',emailAddress:'电子邮件地址',emailSubject:'主题（可选）',emailBody:'消息（可选）',phoneNumber:'电话号码',whatsappNumber:'WhatsApp号码（含国家代码）',whatsappMessage:'消息（可选）',contrast:'警告：颜色对比度较低，部分扫描器可能无法识别。',ready:'✓ 二维码已准备好下载',enterContent:'请输入内容以创建二维码。',tooLong:'内容过长，请缩短文本。',invalid:'请检查必填字段。',downloaded:'✓ 已下载',colorFg:'二维码',colorBg:'背景'},
+hi:{navCreate:'QR बनाएं',navFeatures:'विशेषताएँ',navHow:'कैसे काम करता है',eyebrow:'मुफ़्त QR कोड जनरेटर',heroFirst:'अपना QR कोड बनाएं',heroSecond:'कुछ ही सेकंड में',heroDesc:'लिंक, टेक्स्ट, Wi-Fi और अन्य के लिए QR बनाएं। अनुकूलित करें और मुफ़्त डाउनलोड करें।',typeUrl:'URL / लिंक',typeText:'टेक्स्ट',typeWifi:'Wi-Fi',typeEmail:'ईमेल',typePhone:'फ़ोन',typeWhatsapp:'WhatsApp',customizeTitle:'QR कोड अनुकूलित करें',stepOne:'चरण 1 / 2',qrColor:'QR कोड का रंग',sizeLabel:'डाउनलोड आकार',marginLabel:'सफ़ेद मार्जिन',correctionLabel:'त्रुटि सुधार',low:'कम',medium:'मध्यम (अनुशंसित)',high:'उच्च',highest:'सबसे उच्च',correctionHint:'उच्च सुधार कोड के क्षतिग्रस्त होने पर स्कैन करने में मदद करता है।',generateBtn:'QR कोड बनाएं',previewTitle:'आपका QR कोड',stepTwo:'चरण 2 / 2',emptyTitle:'आपका QR कोड यहाँ दिखेगा',emptyDesc:'सामग्री दर्ज करें और “QR कोड बनाएं” चुनें।',waiting:'सामग्री की प्रतीक्षा',private:'आपके ब्राउज़र में बना',downloadPng:'↓ PNG डाउनलोड करें',downloadSvg:'↓ SVG डाउनलोड करें',freeTitle:'मुफ़्त और आसान',freeDesc:'QR कोड आपके ब्राउज़र में बनता है। आपकी सामग्री हमारे सर्वर पर नहीं भेजी जाती।',featureFast:'तेज़ और आसान',featureFastDesc:'बिना खाते के कुछ क्लिक में QR बनाएं।',featureDesign:'डिज़ाइन अनुकूलित करें',featureDesignDesc:'रंग, आकार और मार्जिन चुनें।',featureDownload:'तुरंत डाउनलोड',featureDownloadDesc:'PNG छवि या SVG फ़ाइल के रूप में सहेजें।',howTitle:'कैसे काम करता है',howDesc:'प्रकार चुनें, विवरण भरें, QR बनाएं और डाउनलोड करें। ये स्थिर QR कोड हैं; प्रिंट करने के बाद जानकारी बदली नहीं जा सकती।',footer:'मुफ़्त QR कोड जनरेटर',urlLabel:'लिंक या URL',urlPlaceholder:'https://example.com',textLabel:'साझा करने के लिए टेक्स्ट',textPlaceholder:'यहाँ टेक्स्ट लिखें',wifiName:'नेटवर्क नाम (SSID)',wifiPassword:'पासवर्ड',wifiSecurity:'नेटवर्क सुरक्षा',wifiNone:'पासवर्ड नहीं',emailAddress:'ईमेल पता',emailSubject:'विषय (वैकल्पिक)',emailBody:'संदेश (वैकल्पिक)',phoneNumber:'फ़ोन नंबर',whatsappNumber:'देश कोड सहित WhatsApp नंबर',whatsappMessage:'संदेश (वैकल्पिक)',contrast:'चेतावनी: रंगों में कम अंतर है; कुछ स्कैनर इसे नहीं पढ़ पाएंगे।',ready:'✓ QR कोड डाउनलोड के लिए तैयार',enterContent:'QR बनाने के लिए सामग्री दर्ज करें।',tooLong:'सामग्री बहुत लंबी है। छोटा टेक्स्ट आज़माएं।',invalid:'कृपया आवश्यक फ़ील्ड जाँचें।',downloaded:'✓ डाउनलोड हो गया',colorFg:'QR',colorBg:'पृष्ठभूमि'},
+ar:{navCreate:'إنشاء QR',navFeatures:'المميزات',navHow:'كيف يعمل',eyebrow:'مولّد رموز QR مجاني',heroFirst:'أنشئ رمز QR الخاص بك',heroSecond:'في ثوانٍ',heroDesc:'أنشئ رمزًا للروابط والنصوص وWi-Fi والمزيد. خصّصه ونزّله مجانًا فورًا.',typeUrl:'رابط URL',typeText:'نص',typeWifi:'Wi-Fi',typeEmail:'بريد إلكتروني',typePhone:'هاتف',typeWhatsapp:'واتساب',customizeTitle:'تخصيص رمز QR',stepOne:'الخطوة 1 من 2',qrColor:'لون رمز QR',sizeLabel:'حجم التنزيل',marginLabel:'الهامش الأبيض',correctionLabel:'تصحيح الأخطاء',low:'منخفض',medium:'متوسط (موصى به)',high:'مرتفع',highest:'الأعلى',correctionHint:'قد يساعد التصحيح الأعلى على قراءة الرمز إذا تعرض للتلف.',generateBtn:'إنشاء رمز QR',previewTitle:'رمز QR الخاص بك',stepTwo:'الخطوة 2 من 2',emptyTitle:'سيظهر رمز QR هنا',emptyDesc:'أدخل المحتوى واضغط على «إنشاء رمز QR».',waiting:'بانتظار المحتوى',private:'تم الإنشاء في متصفحك',downloadPng:'↓ تنزيل PNG',downloadSvg:'↓ تنزيل SVG',freeTitle:'مجاني وسهل',freeDesc:'يتم إنشاء الرمز في متصفحك ولا يتم إرسال المحتوى إلى خادمنا.',featureFast:'سريع وبسيط',featureFastDesc:'أنشئ رمزًا ببضع نقرات دون حساب.',featureDesign:'خصّص التصميم',featureDesignDesc:'اختر الألوان والحجم والهامش.',featureDownload:'تنزيل فوري',featureDownloadDesc:'احفظه كصورة PNG أو ملف SVG قابل للتكبير.',howTitle:'كيف يعمل',howDesc:'اختر نوع المحتوى وأدخل البيانات ثم أنشئ الرمز ونزّله. هذه رموز ثابتة ولا يمكن تعديل محتواها بعد الطباعة.',footer:'مولّد رموز QR مجاني',urlLabel:'الرابط أو URL',urlPlaceholder:'https://example.com',textLabel:'النص المراد مشاركته',textPlaceholder:'اكتب النص هنا',wifiName:'اسم الشبكة (SSID)',wifiPassword:'كلمة المرور',wifiSecurity:'أمان الشبكة',wifiNone:'بدون كلمة مرور',emailAddress:'عنوان البريد الإلكتروني',emailSubject:'الموضوع (اختياري)',emailBody:'الرسالة (اختياري)',phoneNumber:'رقم الهاتف',whatsappNumber:'رقم واتساب مع رمز الدولة',whatsappMessage:'الرسالة (اختياري)',contrast:'تحذير: التباين بين الألوان منخفض وقد لا تتمكن بعض الماسحات من قراءته.',ready:'✓ الرمز جاهز للتنزيل',enterContent:'أدخل المحتوى لإنشاء الرمز.',tooLong:'المحتوى طويل جدًا. جرّب نصًا أقصر.',invalid:'يرجى التحقق من الحقول المطلوبة.',downloaded:'✓ تم التنزيل',colorFg:'الرمز',colorBg:'الخلفية'},
+fr:{navCreate:'Créer un QR',navFeatures:'Avantages',navHow:'Comment ça marche',eyebrow:'Générateur de QR code gratuit',heroFirst:'Créez votre QR code',heroSecond:'en quelques secondes',heroDesc:'Créez un QR pour un lien, du texte, le Wi-Fi et plus encore. Personnalisez-le et téléchargez-le gratuitement.',typeUrl:'URL / Lien',typeText:'Texte',typeWifi:'Wi-Fi',typeEmail:'E-mail',typePhone:'Téléphone',typeWhatsapp:'WhatsApp',customizeTitle:'Personnalisez votre QR code',stepOne:'ÉTAPE 1 SUR 2',qrColor:'Couleur du QR code',sizeLabel:'Taille du téléchargement',marginLabel:'Marge blanche',correctionLabel:'Correction d’erreur',low:'Faible',medium:'Moyenne (recommandée)',high:'Élevée',highest:'Maximale',correctionHint:'Une correction plus élevée peut aider si le code est endommagé.',generateBtn:'Générer le QR code',previewTitle:'Votre QR code',stepTwo:'ÉTAPE 2 SUR 2',emptyTitle:'Votre QR code apparaîtra ici',emptyDesc:'Saisissez votre contenu puis cliquez sur « Générer le QR code ».',waiting:'En attente du contenu',private:'Généré dans votre navigateur',downloadPng:'↓ Télécharger PNG',downloadSvg:'↓ Télécharger SVG',freeTitle:'Gratuit et facile',freeDesc:'Le QR est généré dans votre navigateur. Votre contenu n’est pas envoyé à notre serveur.',featureFast:'Rapide et simple',featureFastDesc:'Créez un QR en quelques clics, sans compte.',featureDesign:'Personnalisez le design',featureDesignDesc:'Choisissez les couleurs, la taille et la marge.',featureDownload:'Téléchargement instantané',featureDownloadDesc:'Enregistrez une image PNG ou un fichier SVG vectoriel.',howTitle:'Comment ça marche',howDesc:'Choisissez le type de contenu, remplissez les champs, générez le QR puis téléchargez-le. Ces QR sont statiques : leur contenu ne peut pas être modifié après impression.',footer:'Générateur de QR code gratuit',urlLabel:'Lien ou URL',urlPlaceholder:'https://exemple.com',textLabel:'Texte à partager',textPlaceholder:'Saisissez votre texte ici',wifiName:'Nom du réseau (SSID)',wifiPassword:'Mot de passe',wifiSecurity:'Sécurité du réseau',wifiNone:'Sans mot de passe',emailAddress:'Adresse e-mail',emailSubject:'Objet (facultatif)',emailBody:'Message (facultatif)',phoneNumber:'Numéro de téléphone',whatsappNumber:'Numéro WhatsApp avec indicatif pays',whatsappMessage:'Message (facultatif)',contrast:'Attention : contraste faible, certains lecteurs peuvent ne pas détecter le code.',ready:'✓ QR code prêt à télécharger',enterContent:'Saisissez le contenu pour créer votre QR code.',tooLong:'Contenu trop long. Essayez un texte plus court.',invalid:'Vérifiez les champs obligatoires.',downloaded:'✓ Téléchargé',colorFg:'QR',colorBg:'Arrière-plan'},
+bn:{navCreate:'QR তৈরি করুন',navFeatures:'বৈশিষ্ট্য',navHow:'যেভাবে কাজ করে',eyebrow:'বিনামূল্যের QR কোড জেনারেটর',heroFirst:'আপনার QR কোড তৈরি করুন',heroSecond:'কয়েক সেকেন্ডে',heroDesc:'লিংক, লেখা, Wi-Fi এবং আরও কিছুর জন্য QR তৈরি করুন। কাস্টমাইজ করে বিনামূল্যে ডাউনলোড করুন।',typeUrl:'URL / লিংক',typeText:'লেখা',typeWifi:'Wi-Fi',typeEmail:'ইমেইল',typePhone:'ফোন',typeWhatsapp:'WhatsApp',customizeTitle:'QR কোড কাস্টমাইজ করুন',stepOne:'ধাপ ১ / ২',qrColor:'QR কোডের রং',sizeLabel:'ডাউনলোডের আকার',marginLabel:'সাদা মার্জিন',correctionLabel:'ত্রুটি সংশোধন',low:'কম',medium:'মাঝারি (প্রস্তাবিত)',high:'উচ্চ',highest:'সর্বোচ্চ',correctionHint:'কোড ক্ষতিগ্রস্ত হলেও বেশি সংশোধন স্ক্যান করতে সাহায্য করতে পারে।',generateBtn:'QR কোড তৈরি করুন',previewTitle:'আপনার QR কোড',stepTwo:'ধাপ ২ / ২',emptyTitle:'আপনার QR কোড এখানে দেখা যাবে',emptyDesc:'তথ্য লিখে “QR কোড তৈরি করুন” চাপুন।',waiting:'তথ্যের অপেক্ষায়',private:'আপনার ব্রাউজারে তৈরি',downloadPng:'↓ PNG ডাউনলোড',downloadSvg:'↓ SVG ডাউনলোড',freeTitle:'বিনামূল্যে ও সহজ',freeDesc:'QR আপনার ব্রাউজারেই তৈরি হয়। আপনার তথ্য আমাদের সার্ভারে পাঠানো হয় না।',featureFast:'দ্রুত ও সহজ',featureFastDesc:'অ্যাকাউন্ট ছাড়াই কয়েক ক্লিকে QR তৈরি করুন।',featureDesign:'ডিজাইন কাস্টমাইজ',featureDesignDesc:'রং, আকার ও মার্জিন বেছে নিন।',featureDownload:'তাৎক্ষণিক ডাউনলোড',featureDownloadDesc:'PNG ছবি বা SVG ফাইল হিসেবে সংরক্ষণ করুন।',howTitle:'যেভাবে কাজ করে',howDesc:'ধরন বেছে তথ্য দিন, QR তৈরি করে ডাউনলোড করুন। এগুলো স্থির QR; প্রিন্টের পর তথ্য পরিবর্তন করা যায় না।',footer:'বিনামূল্যের QR কোড জেনারেটর',urlLabel:'লিংক বা URL',urlPlaceholder:'https://example.com',textLabel:'শেয়ার করার লেখা',textPlaceholder:'এখানে লেখা লিখুন',wifiName:'নেটওয়ার্কের নাম (SSID)',wifiPassword:'পাসওয়ার্ড',wifiSecurity:'নেটওয়ার্ক নিরাপত্তা',wifiNone:'পাসওয়ার্ড নেই',emailAddress:'ইমেইল ঠিকানা',emailSubject:'বিষয় (ঐচ্ছিক)',emailBody:'বার্তা (ঐচ্ছিক)',phoneNumber:'ফোন নম্বর',whatsappNumber:'দেশের কোডসহ WhatsApp নম্বর',whatsappMessage:'বার্তা (ঐচ্ছিক)',contrast:'সতর্কতা: রঙের পার্থক্য কম; কিছু স্ক্যানার পড়তে নাও পারে।',ready:'✓ QR কোড ডাউনলোডের জন্য প্রস্তুত',enterContent:'QR তৈরি করতে তথ্য দিন।',tooLong:'তথ্য অনেক বড়। ছোট লেখা ব্যবহার করুন।',invalid:'প্রয়োজনীয় ঘরগুলো পরীক্ষা করুন।',downloaded:'✓ ডাউনলোড হয়েছে',colorFg:'QR',colorBg:'পটভূমি'},
+pt:{navCreate:'Criar QR',navFeatures:'Recursos',navHow:'Como funciona',eyebrow:'Gerador de QR code grátis',heroFirst:'Crie seu QR code',heroSecond:'em segundos',heroDesc:'Crie QR para links, texto, Wi-Fi e muito mais. Personalize e baixe grátis na hora.',typeUrl:'URL / Link',typeText:'Texto',typeWifi:'Wi-Fi',typeEmail:'E-mail',typePhone:'Telefone',typeWhatsapp:'WhatsApp',customizeTitle:'Personalize seu QR code',stepOne:'ETAPA 1 DE 2',qrColor:'Cor do QR code',sizeLabel:'Tamanho do download',marginLabel:'Margem branca',correctionLabel:'Correção de erros',low:'Baixa',medium:'Média (recomendada)',high:'Alta',highest:'Máxima',correctionHint:'Uma correção maior pode ajudar se o código for danificado.',generateBtn:'Gerar QR code',previewTitle:'Seu QR code',stepTwo:'ETAPA 2 DE 2',emptyTitle:'Seu QR code aparecerá aqui',emptyDesc:'Digite o conteúdo e clique em “Gerar QR code”.',waiting:'Aguardando conteúdo',private:'Gerado no seu navegador',downloadPng:'↓ Baixar PNG',downloadSvg:'↓ Baixar SVG',freeTitle:'Grátis e fácil',freeDesc:'O QR é gerado no navegador. Seu conteúdo não é enviado ao nosso servidor.',featureFast:'Rápido e simples',featureFastDesc:'Crie QR em poucos cliques, sem conta.',featureDesign:'Personalize o design',featureDesignDesc:'Escolha cores, tamanho e margem.',featureDownload:'Baixe na hora',featureDownloadDesc:'Salve como imagem PNG ou arquivo SVG vetorial.',howTitle:'Como funciona',howDesc:'Escolha o tipo de conteúdo, preencha os campos, gere o QR e baixe. Estes são QR estáticos: o conteúdo não pode ser alterado após a impressão.',footer:'Gerador de QR code grátis',urlLabel:'Link ou URL',urlPlaceholder:'https://exemplo.com',textLabel:'Texto para compartilhar',textPlaceholder:'Digite seu texto aqui',wifiName:'Nome da rede (SSID)',wifiPassword:'Senha',wifiSecurity:'Segurança da rede',wifiNone:'Sem senha',emailAddress:'Endereço de e-mail',emailSubject:'Assunto (opcional)',emailBody:'Mensagem (opcional)',phoneNumber:'Número de telefone',whatsappNumber:'WhatsApp com código do país',whatsappMessage:'Mensagem (opcional)',contrast:'Aviso: baixo contraste entre cores; alguns leitores podem não reconhecer o código.',ready:'✓ QR code pronto para baixar',enterContent:'Digite o conteúdo para criar seu QR code.',tooLong:'Conteúdo muito longo. Tente um texto menor.',invalid:'Verifique os campos obrigatórios.',downloaded:'✓ Baixado',colorFg:'QR',colorBg:'Fundo'},
+ru:{navCreate:'Создать QR',navFeatures:'Возможности',navHow:'Как это работает',eyebrow:'Бесплатный генератор QR-кодов',heroFirst:'Создайте свой QR-код',heroSecond:'за несколько секунд',heroDesc:'Создавайте QR-коды для ссылок, текста, Wi-Fi и другого. Настройте и скачайте бесплатно.',typeUrl:'URL / Ссылка',typeText:'Текст',typeWifi:'Wi-Fi',typeEmail:'Эл. почта',typePhone:'Телефон',typeWhatsapp:'WhatsApp',customizeTitle:'Настройте QR-код',stepOne:'ШАГ 1 ИЗ 2',qrColor:'Цвет QR-кода',sizeLabel:'Размер загрузки',marginLabel:'Белое поле',correctionLabel:'Коррекция ошибок',low:'Низкая',medium:'Средняя (рекомендуется)',high:'Высокая',highest:'Максимальная',correctionHint:'Высокая коррекция может помочь сканировать повреждённый код.',generateBtn:'Создать QR-код',previewTitle:'Ваш QR-код',stepTwo:'ШАГ 2 ИЗ 2',emptyTitle:'QR-код появится здесь',emptyDesc:'Введите данные и нажмите «Создать QR-код».',waiting:'Ожидание данных',private:'Создано в браузере',downloadPng:'↓ Скачать PNG',downloadSvg:'↓ Скачать SVG',freeTitle:'Бесплатно и просто',freeDesc:'QR-код создаётся в браузере. Ваши данные не отправляются на наш сервер.',featureFast:'Быстро и просто',featureFastDesc:'Создайте QR за несколько кликов без аккаунта.',featureDesign:'Настройка дизайна',featureDesignDesc:'Выберите цвет, размер и поле.',featureDownload:'Мгновенная загрузка',featureDownloadDesc:'Сохраните PNG-изображение или векторный SVG.',howTitle:'Как это работает',howDesc:'Выберите тип данных, заполните поля, создайте и скачайте QR-код. Это статические QR-коды: после печати их содержимое нельзя изменить.',footer:'Бесплатный генератор QR-кодов',urlLabel:'Ссылка или URL',urlPlaceholder:'https://example.com',textLabel:'Текст для отправки',textPlaceholder:'Введите текст здесь',wifiName:'Имя сети (SSID)',wifiPassword:'Пароль',wifiSecurity:'Защита сети',wifiNone:'Без пароля',emailAddress:'Адрес электронной почты',emailSubject:'Тема (необязательно)',emailBody:'Сообщение (необязательно)',phoneNumber:'Номер телефона',whatsappNumber:'WhatsApp с кодом страны',whatsappMessage:'Сообщение (необязательно)',contrast:'Внимание: низкий контраст цветов; некоторые сканеры могут не распознать код.',ready:'✓ QR-код готов к загрузке',enterContent:'Введите данные для создания QR-кода.',tooLong:'Слишком длинные данные. Попробуйте сократить текст.',invalid:'Проверьте обязательные поля.',downloaded:'✓ Загружено',colorFg:'QR',colorBg:'Фон'},
+ur:{navCreate:'QR بنائیں',navFeatures:'خصوصیات',navHow:'یہ کیسے کام کرتا ہے',eyebrow:'مفت QR کوڈ جنریٹر',heroFirst:'اپنا QR کوڈ بنائیں',heroSecond:'چند سیکنڈ میں',heroDesc:'لنک، متن، Wi-Fi اور مزید کے لیے QR بنائیں۔ اپنی مرضی کے مطابق بنائیں اور مفت ڈاؤن لوڈ کریں۔',typeUrl:'URL / لنک',typeText:'متن',typeWifi:'Wi-Fi',typeEmail:'ای میل',typePhone:'فون',typeWhatsapp:'WhatsApp',customizeTitle:'QR کوڈ حسبِ ضرورت بنائیں',stepOne:'مرحلہ 1 از 2',qrColor:'QR کوڈ کا رنگ',sizeLabel:'ڈاؤن لوڈ کا سائز',marginLabel:'سفید حاشیہ',correctionLabel:'غلطی کی اصلاح',low:'کم',medium:'درمیانہ (تجویز کردہ)',high:'زیادہ',highest:'سب سے زیادہ',correctionHint:'زیادہ اصلاح کوڈ کو نقصان پہنچنے پر اسکین کرنے میں مدد دے سکتی ہے۔',generateBtn:'QR کوڈ بنائیں',previewTitle:'آپ کا QR کوڈ',stepTwo:'مرحلہ 2 از 2',emptyTitle:'آپ کا QR کوڈ یہاں نظر آئے گا',emptyDesc:'مواد درج کریں اور “QR کوڈ بنائیں” دبائیں۔',waiting:'مواد کا انتظار',private:'آپ کے براؤزر میں بنایا گیا',downloadPng:'↓ PNG ڈاؤن لوڈ',downloadSvg:'↓ SVG ڈاؤن لوڈ',freeTitle:'مفت اور آسان',freeDesc:'QR کوڈ آپ کے براؤزر میں بنتا ہے۔ آپ کا مواد ہمارے سرور کو نہیں بھیجا جاتا۔',featureFast:'تیز اور آسان',featureFastDesc:'اکاؤنٹ کے بغیر چند کلکس میں QR بنائیں۔',featureDesign:'ڈیزائن حسبِ ضرورت',featureDesignDesc:'رنگ، سائز اور حاشیہ منتخب کریں۔',featureDownload:'فوری ڈاؤن لوڈ',featureDownloadDesc:'PNG تصویر یا SVG فائل محفوظ کریں۔',howTitle:'یہ کیسے کام کرتا ہے',howDesc:'مواد کی قسم منتخب کریں، تفصیلات بھریں، QR بنائیں اور ڈاؤن لوڈ کریں۔ یہ جامد QR کوڈ ہیں؛ پرنٹ کے بعد مواد تبدیل نہیں کیا جا سکتا۔',footer:'مفت QR کوڈ جنریٹر',urlLabel:'لنک یا URL',urlPlaceholder:'https://example.com',textLabel:'شیئر کرنے کے لیے متن',textPlaceholder:'یہاں متن لکھیں',wifiName:'نیٹ ورک کا نام (SSID)',wifiPassword:'پاس ورڈ',wifiSecurity:'نیٹ ورک سیکیورٹی',wifiNone:'پاس ورڈ نہیں',emailAddress:'ای میل ایڈریس',emailSubject:'موضوع (اختیاری)',emailBody:'پیغام (اختیاری)',phoneNumber:'فون نمبر',whatsappNumber:'ملکی کوڈ کے ساتھ WhatsApp نمبر',whatsappMessage:'پیغام (اختیاری)',contrast:'تنبیہ: رنگوں میں فرق کم ہے؛ کچھ اسکینر کوڈ نہیں پڑھ پائیں گے۔',ready:'✓ QR کوڈ ڈاؤن لوڈ کے لیے تیار',enterContent:'QR بنانے کے لیے مواد درج کریں۔',tooLong:'مواد بہت طویل ہے۔ مختصر متن آزمائیں۔',invalid:'ضروری خانے چیک کریں۔',downloaded:'✓ ڈاؤن لوڈ ہوگیا',colorFg:'QR',colorBg:'پس منظر'},
+id:{navCreate:'Buat QR',navFeatures:'Fitur',navHow:'Cara kerja',eyebrow:'Generator kode QR gratis',heroFirst:'Buat kode QR Anda',heroSecond:'dalam hitungan detik',heroDesc:'Buat QR untuk tautan, teks, Wi-Fi, dan lainnya. Sesuaikan lalu unduh gratis.',typeUrl:'URL / Tautan',typeText:'Teks',typeWifi:'Wi-Fi',typeEmail:'Email',typePhone:'Telepon',typeWhatsapp:'WhatsApp',customizeTitle:'Sesuaikan kode QR',stepOne:'LANGKAH 1 DARI 2',qrColor:'Warna kode QR',sizeLabel:'Ukuran unduhan',marginLabel:'Margin putih',correctionLabel:'Koreksi kesalahan',low:'Rendah',medium:'Sedang (disarankan)',high:'Tinggi',highest:'Tertinggi',correctionHint:'Koreksi lebih tinggi dapat membantu jika kode rusak.',generateBtn:'Buat kode QR',previewTitle:'Kode QR Anda',stepTwo:'LANGKAH 2 DARI 2',emptyTitle:'Kode QR Anda akan muncul di sini',emptyDesc:'Masukkan konten lalu pilih “Buat kode QR”.',waiting:'Menunggu konten',private:'Dibuat di browser Anda',downloadPng:'↓ Unduh PNG',downloadSvg:'↓ Unduh SVG',freeTitle:'Gratis dan mudah',freeDesc:'Kode QR dibuat di browser Anda. Konten tidak dikirim ke server kami.',featureFast:'Cepat dan sederhana',featureFastDesc:'Buat QR dalam beberapa klik tanpa akun.',featureDesign:'Sesuaikan desain',featureDesignDesc:'Pilih warna, ukuran, dan margin.',featureDownload:'Unduh langsung',featureDownloadDesc:'Simpan sebagai gambar PNG atau file SVG.',howTitle:'Cara kerja',howDesc:'Pilih jenis konten, isi kolom, buat QR lalu unduh. Ini adalah QR statis; informasinya tidak dapat diedit setelah dicetak.',footer:'Generator kode QR gratis',urlLabel:'Tautan atau URL',urlPlaceholder:'https://contoh.com',textLabel:'Teks untuk dibagikan',textPlaceholder:'Ketik teks di sini',wifiName:'Nama jaringan (SSID)',wifiPassword:'Kata sandi',wifiSecurity:'Keamanan jaringan',wifiNone:'Tanpa kata sandi',emailAddress:'Alamat email',emailSubject:'Subjek (opsional)',emailBody:'Pesan (opsional)',phoneNumber:'Nomor telepon',whatsappNumber:'Nomor WhatsApp dengan kode negara',whatsappMessage:'Pesan (opsional)',contrast:'Peringatan: kontras warna rendah; beberapa pemindai mungkin tidak dapat membaca kode.',ready:'✓ Kode QR siap diunduh',enterContent:'Masukkan konten untuk membuat QR.',tooLong:'Konten terlalu panjang. Coba teks yang lebih singkat.',invalid:'Periksa kolom yang wajib diisi.',downloaded:'✓ Diunduh',colorFg:'QR',colorBg:'Latar'},
+ja:{navCreate:'QRを作成',navFeatures:'特徴',navHow:'使い方',eyebrow:'無料QRコードジェネレーター',heroFirst:'QRコードを作成',heroSecond:'わずか数秒で',heroDesc:'リンク、テキスト、Wi-FiなどのQRコードを作成。カスタマイズして無料でダウンロードできます。',typeUrl:'URL / リンク',typeText:'テキスト',typeWifi:'Wi-Fi',typeEmail:'メール',typePhone:'電話',typeWhatsapp:'WhatsApp',customizeTitle:'QRコードをカスタマイズ',stepOne:'ステップ 1 / 2',qrColor:'QRコードの色',sizeLabel:'ダウンロードサイズ',marginLabel:'白い余白',correctionLabel:'誤り訂正レベル',low:'低',medium:'中（おすすめ）',high:'高',highest:'最高',correctionHint:'訂正レベルを高くすると、コードが傷ついても読み取りやすくなります。',generateBtn:'QRコードを作成',previewTitle:'あなたのQRコード',stepTwo:'ステップ 2 / 2',emptyTitle:'ここにQRコードが表示されます',emptyDesc:'内容を入力し「QRコードを作成」を押してください。',waiting:'入力待ち',private:'ブラウザー内で生成',downloadPng:'↓ PNGをダウンロード',downloadSvg:'↓ SVGをダウンロード',freeTitle:'無料で簡単',freeDesc:'QRコードはブラウザー内で生成されます。入力内容はサーバーに送信されません。',featureFast:'すばやく簡単',featureFastDesc:'アカウント不要で数クリックで作成。',featureDesign:'デザインを調整',featureDesignDesc:'色、サイズ、余白を選択できます。',featureDownload:'すぐにダウンロード',featureDownloadDesc:'PNG画像または拡大可能なSVGとして保存。',howTitle:'使い方',howDesc:'種類を選び、内容を入力してQRを生成しダウンロードします。これは静的QRコードです。印刷後に内容を変更することはできません。',footer:'無料QRコードジェネレーター',urlLabel:'リンクまたはURL',urlPlaceholder:'https://example.com',textLabel:'共有するテキスト',textPlaceholder:'ここにテキストを入力',wifiName:'ネットワーク名（SSID）',wifiPassword:'パスワード',wifiSecurity:'ネットワークセキュリティ',wifiNone:'パスワードなし',emailAddress:'メールアドレス',emailSubject:'件名（任意）',emailBody:'メッセージ（任意）',phoneNumber:'電話番号',whatsappNumber:'国番号付きWhatsApp番号',whatsappMessage:'メッセージ（任意）',contrast:'警告：色のコントラストが低く、一部のスキャナーで読み取れない場合があります。',ready:'✓ QRコードのダウンロード準備完了',enterContent:'QRコードを作成する内容を入力してください。',tooLong:'内容が長すぎます。短いテキストをお試しください。',invalid:'必須項目を確認してください。',downloaded:'✓ ダウンロードしました',colorFg:'QR',colorBg:'背景'}
+};
+var currentLang='es',currentType='url',qr=null,lastPayload='',currentSize=512;
+var fieldDefinitions={
+url:[['url','urlLabel','urlPlaceholder','text','https://example.com']],
+text:[['text','textLabel','textPlaceholder','textarea','']],
+wifi:[['wifiName','wifiName','wifiName','text',''],['wifiPassword','wifiPassword','wifiPassword','text',''],['wifiSecurity','wifiSecurity','wifiSecurity','select','WPA']],
+email:[['emailAddress','emailAddress','emailAddress','email',''],['emailSubject','emailSubject','emailSubject','text',''],['emailBody','emailBody','emailBody','textarea','']],
+phone:[['phoneNumber','phoneNumber','phoneNumber','tel','']],
+whatsapp:[['whatsappNumber','whatsappNumber','whatsappNumber','tel',''],['whatsappMessage','whatsappMessage','whatsappMessage','text','']],
+sms:[['smsNumber','smsNumber','smsNumber','tel',''],['smsMessage','smsMessage','smsMessage','textarea','']],
+location:[['latitude','latitude','latitude','text',''],['longitude','longitude','longitude','text','']],
+vcard:[['contactName','contactName','contactName','text',''],['contactPhone','contactPhone','contactPhone','tel',''],['contactEmail','contactEmail','contactEmail','email',''],['contactOrg','contactOrg','contactOrg','text','']]
+};
+var inputHints={url:'urlPlaceholder',text:'textPlaceholder'};
+function t(k){return (translations[currentLang]&&translations[currentLang][k])||(translations.en[k])||k}
+function safeId(s){return s.replace(/[^a-zA-Z0-9]/g,'')}
+function renderFields(){
+ var root=$('dynamicFields');root.innerHTML='';
+ fieldDefinitions[currentType].forEach(function(def,i){
+   var id='input-'+safeId(def[0]),wrap=document.createElement('div');wrap.className='form-group';
+   var lab=document.createElement('label');lab.className='field-label';lab.htmlFor=id;lab.textContent=t(def[1]);wrap.appendChild(lab);
+   var el;
+   if(def[3]==='textarea'){el=document.createElement('textarea');el.rows=3;el.className='field';}
+   else if(def[3]==='select'){el=document.createElement('select');el.className='field';[['WPA','WPA/WPA2'],['WEP','WEP'],['nopass',t('wifiNone')]].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];el.appendChild(op)});}
+   else{el=document.createElement('input');el.type=def[3];el.className='field';}
+   el.id=id;el.dataset.key=def[0];el.autocomplete='off';
+   if(def[4]&&def[3]!=='select')el.placeholder=t(def[2]);
+   wrap.appendChild(el);
+   if(currentType==='wifi'&&def[0]==='wifiPassword'){el.type='password';}
+   root.appendChild(wrap);
+ });
+ if(currentLang==='ar'||currentLang==='ur')root.dir='rtl';else root.dir='ltr';
+}
+function payloadFromFields(){
+ function val(key){var e=document.querySelector('[data-key="'+key+'"]');return e?e.value.trim():''}
+ if(currentType==='url'){
+   var s=val('url');if(!s)return '';
+   if(!/^[a-z][a-z0-9+.-]*:/i.test(s)&&!/\s/.test(s)&&/^[^/]+\.[a-z]{2,}([/:?#].*)?$/i.test(s))s='https://'+s;
+   return s;
+ }
+ if(currentType==='text')return val('text');
+ if(currentType==='wifi'){
+   var name=val('wifiName'),pass=val('wifiPassword'),sec=val('wifiSecurity');
+   if(!name)return '';
+   return 'WIFI:T:'+(sec==='nopass'?'nopass':sec)+';S:'+name.replace(/[\\;,:"]/g,'\\$&')+';P:'+pass.replace(/[\\;,:"]/g,'\\$&')+';;';
+ }
+ if(currentType==='email'){
+   var email=val('emailAddress');if(!email)return '';
+   return 'mailto:'+email+'?subject='+encodeURIComponent(val('emailSubject'))+'&body='+encodeURIComponent(val('emailBody'));
+ }
+ if(currentType==='phone'){var phone=val('phoneNumber');return phone?'tel:'+phone:''}
+ if(currentType==='whatsapp'){
+   var number=val('whatsappNumber').replace(/[^\d]/g,'');if(!number)return '';
+   return 'https://wa.me/'+number+(val('whatsappMessage')?'?text='+encodeURIComponent(val('whatsappMessage')):'');
+ }
+ if(currentType==='sms'){
+   var smsNumber=val('smsNumber');if(!smsNumber)return '';
+   return 'SMSTO:'+smsNumber+':'+val('smsMessage');
+ }
+ if(currentType==='location'){
+   var lat=val('latitude'),lon=val('longitude');
+   if(!lat||!lon||!Number.isFinite(Number(lat))||!Number.isFinite(Number(lon))||Math.abs(Number(lat))>90||Math.abs(Number(lon))>180)return '';
+   return 'geo:'+Number(lat)+','+Number(lon);
+ }
+ if(currentType==='vcard'){
+   var name=val('contactName');if(!name)return '';
+   function esc(v){return v.replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/;/g,'\\;').replace(/,/g,'\\,')}
+   return 'BEGIN:VCARD\nVERSION:3.0\nFN:'+esc(name)+'\n'+(val('contactPhone')?'TEL;TYPE=CELL:'+esc(val('contactPhone'))+'\n':'')+(val('contactEmail')?'EMAIL:'+esc(val('contactEmail'))+'\n':'')+(val('contactOrg')?'ORG:'+esc(val('contactOrg'))+'\n':'')+'END:VCARD';
+ }
+ return '';
+}
+function luminance(hex){var vals=[1,3,5].map(function(i){var c=parseInt(hex.slice(i,i+2),16)/255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)});return .2126*vals[0]+.7152*vals[1]+.0722*vals[2]}
+function setStatus(message,error){$('status').textContent=message;$('status').className='status'+(error?' error':'')}
+function buildQR(){
+ var payload=payloadFromFields();
+ $('sizeValue').textContent=$('size').value+' × '+$('size').value+' px';
+ $('marginValue').textContent=$('margin').value;
+ $('fgValue').textContent=$('fg').value.toUpperCase();$('bgValue').textContent=$('bg').value.toUpperCase();
+ if(!payload){qr=null;$('qrCanvas').hidden=true;$('emptyState').hidden=false;$('downloadPng').disabled=true;$('downloadSvg').disabled=true;$('qrMeta').textContent=t('waiting');setStatus(t('enterContent'));return}
+ try{var q=qrcode(0,$('ec').value);q.addData(payload,'Byte');q.make();qr=q;lastPayload=payload;drawQR();$('downloadPng').disabled=false;$('downloadSvg').disabled=false;$('qrMeta').textContent=t('ready');var contrast=(Math.max(luminance($('fg').value),luminance($('bg').value))+.05)/(Math.min(luminance($('fg').value),luminance($('bg').value))+.05);setStatus(contrast<3?t('contrast'):t('ready'),contrast<3)}
+ catch(err){qr=null;$('qrCanvas').hidden=true;$('emptyState').hidden=false;$('downloadPng').disabled=true;$('downloadSvg').disabled=true;$('qrMeta').textContent=t('waiting');setStatus(t('tooLong'),true)}
+}
+function drawQR(){
+ var n=qr.getModuleCount(),m=Number($('margin').value),total=n+2*m,target=Number($('size').value),px=Math.max(1,Math.floor(target/total)),w=px*total,canvas=$('qrCanvas'),ctx=canvas.getContext('2d');
+ canvas.width=canvas.height=w;ctx.fillStyle=$('bg').value;ctx.fillRect(0,0,w,w);ctx.fillStyle=$('fg').value;
+ for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(qr.isDark(r,c))ctx.fillRect((c+m)*px,(r+m)*px,px,px);
+ canvas.style.width=Math.min(w,340)+'px';canvas.hidden=false;$('emptyState').hidden=true;currentSize=target;
+}
+function svgString(){
+ var n=qr.getModuleCount(),m=Number($('margin').value),total=n+2*m,d='';
+ for(var r=0;r<n;r++){var c=0;while(c<n){if(qr.isDark(r,c)){var start=c;while(c<n&&qr.isDark(r,c))c++;d+='M'+(start+m)+' '+(r+m)+'h'+(c-start)+'v1h-'+(c-start)+'z'}else c++}}
+ return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+total+' '+total+'" width="'+currentSize+'" height="'+currentSize+'" shape-rendering="crispEdges"><rect width="'+total+'" height="'+total+'" fill="'+$('bg').value+'"/><path fill="'+$('fg').value+'" d="'+d+'"/></svg>';
+}
+function saveBlob(blob,ext){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download='aminlz-qr-'+currentType+'.'+ext;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1500);$('qrMeta').textContent=t('downloaded')}
+function applyLanguage(lang){
+ currentLang=translations[lang]?lang:'en';$('language').value=currentLang;$('langFlag').textContent=flags[currentLang];document.documentElement.lang=currentLang;
+ document.documentElement.dir=(currentLang==='ar'||currentLang==='ur')?'rtl':'ltr';
+ document.querySelectorAll('[data-i18n]').forEach(function(el){var key=el.dataset.i18n;if(t(key))el.textContent=t(key)});
+ document.querySelectorAll('[data-type]').forEach(function(b){var key={url:'typeUrl',text:'typeText',wifi:'typeWifi',email:'typeEmail',phone:'typePhone',whatsapp:'typeWhatsapp',sms:'typeSms',location:'typeLocation',vcard:'typeVcard'}[b.dataset.type];b.querySelector('span:last-child').textContent=t(key)});
+ renderFields();buildQR();
+}
+function setType(type){currentType=type;document.querySelectorAll('[data-type]').forEach(function(b){b.classList.toggle('active',b.dataset.type===type)});renderFields();buildQR()}
+$('language').addEventListener('change',function(){applyLanguage(this.value)});
+$('typebar').addEventListener('click',function(e){var b=e.target.closest('[data-type]');if(b)setType(b.dataset.type)});
+$('generate').addEventListener('click',buildQR);
+['fg','bg','size','margin','ec'].forEach(function(id){$(id).addEventListener('input',buildQR);$(id).addEventListener('change',buildQR)});
+$('dynamicFields').addEventListener('input',function(){setStatus('');buildQR();});
+document.querySelectorAll('.color-preset').forEach(function(b){b.addEventListener('click',function(){$('fg').value=this.dataset.fg;$('bg').value=this.dataset.bg;buildQR();});});
+$('downloadPng').addEventListener('click',function(){if(!qr)return;$('qrCanvas').toBlob(function(blob){if(blob)saveBlob(blob,'png')},'image/png')});
+$('downloadSvg').addEventListener('click',function(){if(!qr)return;saveBlob(new Blob([svgString()],{type:'image/svg+xml;charset=utf-8'}),'svg')});
+var starCanvas=$('starfield'),starCtx=starCanvas.getContext('2d'),stars=[],starMouse={x:-1000,y:-1000};
+function resizeStars(){
+ var dpr=Math.min(window.devicePixelRatio||1,2),w=window.innerWidth,h=window.innerHeight;
+ starCanvas.width=Math.round(w*dpr);starCanvas.height=Math.round(h*dpr);starCtx.setTransform(dpr,0,0,dpr,0,0);
+ var count=Math.min(220,Math.round(w*h/6500));
+ stars=Array.from({length:count},function(){return{x:Math.random()*w,y:Math.random()*h,ox:Math.random()*w,oy:Math.random()*h,r:.35+Math.random()*1.35,a:.25+Math.random()*.7,phase:Math.random()*Math.PI*2,speed:.3+Math.random()*.8}});
+}
+function drawStars(time){
+ var w=window.innerWidth,h=window.innerHeight;starCtx.clearRect(0,0,w,h);
+ if(document.body.classList.contains('dark')){
+  stars.forEach(function(st){
+   var dx=starMouse.x-st.ox,dy=starMouse.y-st.oy,dist=Math.sqrt(dx*dx+dy*dy),pull=Math.max(0,1-dist/190)*.42;
+   var x=st.ox+dx*pull,y=st.oy+dy*pull+Math.sin(time*.00035*st.speed+st.phase)*2.5;
+   starCtx.globalAlpha=st.a*(.78+.22*Math.sin(time*.001*st.speed+st.phase));
+   starCtx.fillStyle='#dce7ff';starCtx.shadowBlur=st.r>1.2?8:3;starCtx.shadowColor='#83aaff';
+   starCtx.beginPath();starCtx.arc(x,y,st.r,0,Math.PI*2);starCtx.fill();
+  });
+ }
+ starCtx.globalAlpha=1;starCtx.shadowBlur=0;requestAnimationFrame(drawStars);
+}
+window.addEventListener('resize',resizeStars);
+window.addEventListener('pointermove',function(e){starMouse.x=e.clientX;starMouse.y=e.clientY},{passive:true});
+window.addEventListener('pointerleave',function(){starMouse.x=-1000;starMouse.y=-1000});
+resizeStars();requestAnimationFrame(drawStars);
+$('themeToggle').addEventListener('click',function(){document.body.classList.toggle('dark');this.textContent=document.body.classList.contains('dark')?'☀':'☾'});
+$('year').textContent=new Date().getFullYear();
+
+var feedbackForm=$('feedbackForm');
+if(feedbackForm){
+ feedbackForm.addEventListener('submit',function(e){
+  var email=$('feedbackEmail').value.trim(),consent=$('feedbackConsent');
+  if(email&&!consent.checked){e.preventDefault();consent.setCustomValidity('Marca la casilla si quieres que usemos tu correo para responderte.');consent.reportValidity();return;}
+  consent.setCustomValidity('');
+ });
+ $('feedbackConsent').addEventListener('change',function(){this.setCustomValidity('')});
+ if(new URLSearchParams(window.location.search).get('feedback')==='sent'){
+  $('feedbackSuccess').style.display='block';
+  $('feedbackSuccess').textContent='Gracias por ayudarnos a mejorar AminLZ QR.';
+ }
+}
+
+applyLanguage('es');
+})();
+</script>
+</body>
+</html>
